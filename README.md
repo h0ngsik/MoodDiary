@@ -4,10 +4,27 @@ Next.js로 구현한 감정 일기 웹 애플리케이션입니다.
 
 ## 주요 기능
 
+### 1. 감정 일기
+
 - 감정 일기 작성/수정/삭제
 - 감정별 필터링 및 검색
-- 회고 작성 기능
+- 최신순/오래된순 정렬
+- 페이지네이션 (12개씩 표시)
+
+### 2. 사진 보관함
+
+- 사진 업로드 및 미리보기
+- 이미지 갤러리 (1열 레이아웃)
+- 무한 스크롤
+- 최신순/오래된순 정렬
+- localStorage를 활용한 데이터 저장
+
+### 3. UI/UX
+
 - 반응형 디자인
+- 다크모드 지원 (준비 중)
+- 모달 기반의 작성/수정 인터페이스
+- 직관적인 필터링 및 검색
 
 ## 기술 스택
 
@@ -15,6 +32,7 @@ Next.js로 구현한 감정 일기 웹 애플리케이션입니다.
 - TypeScript
 - TailwindCSS
 - Zustand
+- localStorage (데이터 저장)
 
 ## 시작하기
 
@@ -30,37 +48,68 @@ npm run dev
 
 ```
 src/
-├── app/              # Next.js 앱 라우터
-├── components/       # 리액트 컴포넌트
-│   ├── layout/      # 레이아웃 관련 컴포넌트
-│   ├── mood/        # 감정 일기 관련 컴포넌트
-│   └── ui/          # 공통 UI 컴포넌트
-├── stores/          # Zustand 스토어
-├── types/           # TypeScript 타입 정의
-├── constants/       # 상수 정의
-└── utils/           # 유틸리티 함수
+├── app/                    # Next.js 앱 라우터
+│   ├── page.tsx           # 메인 페이지 (일기 보관함)
+│   └── photos/            # 사진 보관함
+│       └── page.tsx
+├── components/            # 리액트 컴포넌트
+│   ├── layout/           # 레이아웃 관련 컴포넌트
+│   │   ├── Banner.tsx
+│   │   ├── Footer.tsx
+│   │   └── Header.tsx
+│   ├── mood/             # 감정 일기 관련 컴포넌트
+│   │   ├── CancelModal.tsx
+│   │   ├── DeleteMoodModal.tsx
+│   │   ├── MoodCard.tsx
+│   │   ├── MoodHistory.tsx
+│   │   ├── SuccessModal.tsx
+│   │   └── WriteMoodModal.tsx
+│   ├── photo/            # 사진 보관함 관련 컴포넌트
+│   │   ├── PhotoGallery.tsx
+│   │   └── UploadPhotoModal.tsx
+│   └── ui/               # 공통 UI 컴포넌트
+│       ├── Modal.tsx
+│       ├── Pagination.tsx
+│       └── ScrollToTop.tsx
+├── stores/               # Zustand 스토어
+│   ├── moodStore.ts      # 감정 일기 상태 관리
+│   └── photoStore.ts     # 사진 보관함 상태 관리
+├── types/                # TypeScript 타입 정의
+│   ├── mood.ts
+│   └── photo.ts
+├── constants/            # 상수 정의
+│   └── moods.ts
+└── utils/               # 유틸리티 함수
+    └── sampleData.ts
 ```
 
 ## 주요 기능 설명
 
-### 감정 일기 작성
+### 1. 감정 일기 작성
 
 - 5가지 감정 타입 선택 가능
 - 제목과 내용 입력
 - 실시간 미리보기
+- 수정 및 삭제 기능
 
-### 회고 기능
+### 2. 감정 일기 목록
 
-- 각 일기마다 회고 작성 가능
-- 회고 내용 관리 및 삭제
-
-### 필터링 및 검색
-
+- 그리드 레이아웃 (4열)
 - 감정별 필터링
 - 제목/내용 검색
 - 최신순/오래된순 정렬
+- 페이지당 12개 항목
 
-### 반응형 디자인
+### 3. 사진 보관함
+
+- 드래그 앤 드롭 이미지 업로드
+- 이미지 미리보기
+- 1열 갤러리 레이아웃
+- 무한 스크롤
+- localStorage 기반 데이터 관리
+
+### 4. 반응형 디자인
 
 - 모바일부터 데스크탑까지 대응
 - 그리드 레이아웃 자동 조정
+- 모달 반응형 크기 조정
