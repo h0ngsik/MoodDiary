@@ -89,7 +89,7 @@ export const WriteMoodModal = ({ isOpen, onClose }: WriteMoodModalProps) => {
 
   return (
     <>
-      <Modal isOpen={isOpen} onClose={handleCloseAttempt} size="large">
+      <Modal isOpen={isOpen} onClose={handleCloseAttempt}>
         <div className="flex flex-col items-center p-6 gap-10">
           {/* 제목 */}
           <h2 className="w-[592px] text-2xl font-bold leading-6 tracking-[-0.01em] text-black">

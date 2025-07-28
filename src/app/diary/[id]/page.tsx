@@ -187,7 +187,7 @@ export default function DiaryDetailPage() {
                   <div className="flex justify-between items-center">
                     <div className="flex items-center gap-2">
                       <img
-                        src={`/assets/images/mood_${
+                        src={`/assets/images/mood_detail_${
                           entry.moodType === "neutral"
                             ? "other"
                             : entry.moodType

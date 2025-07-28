@@ -77,7 +77,7 @@ export const UploadPhotoModal = ({
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
-      <div className="bg-white rounded-2xl shadow-xl w-[427px]">
+      <div className="bg-white rounded-2xl shadow-xl w-[427px] overflow-hidden">
         <div className="p-4">
           <h2 className="text-xl font-bold mb-4">사진 업로드</h2>
 
