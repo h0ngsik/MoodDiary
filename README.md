@@ -14,8 +14,7 @@ Next.js로 구현한 감정 일기 웹 애플리케이션입니다.
 - Next.js 14 (App Router)
 - TypeScript
 - TailwindCSS
-- Zustand (상태 관리)
-- react-hook-form
+- Zustand
 
 ## 시작하기
 
