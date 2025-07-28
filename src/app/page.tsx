@@ -18,7 +18,7 @@ export default function Home() {
     <main className="min-h-screen bg-white">
       <Header />
       <Banner />
-      <div className="w-full max-w-[1168px] mx-auto px-5 py-10">
+      <div className="w-full max-w-[1168px] mx-auto px-5 py-5">
         <MoodHistory />
       </div>
       <Footer />

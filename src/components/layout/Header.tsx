@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { Heart, Moon, Sun } from "lucide-react";
+import { Moon, Sun } from "lucide-react";
+import Link from "next/link";
 
 export const Header = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -13,15 +14,12 @@ export const Header = () => {
 
   return (
     <header className="w-full bg-white">
-      <div className="w-full max-w-[1168px] mx-auto px-5 py-4">
+      <div className="w-full max-w-[1168px] mx-auto px-5 py-2">
         <nav className="flex justify-between items-center h-[60px]">
           {/* 로고 */}
-          <div className="flex items-center space-x-3">
-            <div className="flex items-center justify-center w-10 h-10 bg-primary-500 rounded-full">
-              <Heart className="w-6 h-6 text-white" />
-            </div>
-            <h1 className="text-lg font-bold text-black">만지의 다이어리</h1>
-          </div>
+          <Link href="/">
+            <h1 className="text-lg font-bold text-black">민지의 다이어리</h1>
+          </Link>
 
           {/* 다크모드 토글 */}
           <div className="flex items-center space-x-2">

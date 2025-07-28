@@ -1,12 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { Search, Plus, ChevronDown } from "lucide-react";
+import { Search, Plus } from "lucide-react";
 import { useMoodStore } from "@/stores/moodStore";
 import { MoodCard } from "./MoodCard";
 import { Pagination } from "@/components/ui/Pagination";
 import { WriteMoodModal } from "./WriteMoodModal";
 import { MOOD_CONFIG } from "@/constants/moods";
+import { PhotoGallery } from "../photo/PhotoGallery";
+import { UploadPhotoModal } from "../photo/UploadPhotoModal";
 import type { MoodType } from "@/types/mood";
 
 // 탭 정의
@@ -32,51 +34,44 @@ export const MoodHistory = () => {
   const [selectedMood, setSelectedMood] = useState<MoodType | "all">("all");
   const [activeTab, setActiveTab] = useState<TabType>("diary");
   const [isWriteModalOpen, setIsWriteModalOpen] = useState(false);
-  const itemsPerPage = 12; // 페이지당 표시할 항목 수
+  const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
+  const itemsPerPage = 12;
 
   // 필터링 및 정렬 로직
   const filteredAndSortedEntries = moodEntries
     .filter((entry) => {
-      // 검색어 필터링
       const matchesSearch = entry.note
         ?.toLowerCase()
         .includes(searchQuery.toLowerCase());
 
-      // 감정 필터링
       const matchesMood =
         selectedMood === "all" || entry.moodType === selectedMood;
 
       return matchesSearch && matchesMood;
     })
     .sort((a, b) => {
-      // 정렬
       const dateA = new Date(a.date).getTime();
       const dateB = new Date(b.date).getTime();
       return sortOption === "latest" ? dateB - dateA : dateA - dateB;
     });
 
-  // 전체 페이지 수 계산
   const totalPages = Math.ceil(filteredAndSortedEntries.length / itemsPerPage);
 
-  // 현재 페이지에 표시할 항목 계산
   const currentItems = filteredAndSortedEntries.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
 
-  // 페이지 변경 핸들러
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  // 필터 변경 시 페이지 초기화
   const handleFilterChange = (mood: MoodType | "all") => {
     setSelectedMood(mood);
     setCurrentPage(1);
   };
 
-  // 탭 변경 시 필터 초기화
   const handleTabChange = (tab: TabType) => {
     setActiveTab(tab);
     setSelectedMood("all");
@@ -85,7 +80,7 @@ export const MoodHistory = () => {
   };
 
   return (
-    <div className="space-y-12">
+    <div className="space-y-6">
       {/* 탭 영역 */}
       <div className="flex justify-start">
         <div className="flex items-center gap-4">
@@ -117,7 +112,7 @@ export const MoodHistory = () => {
                   onChange={(e) =>
                     handleFilterChange(e.target.value as MoodType | "all")
                   }
-                  className="w-full appearance-none bg-white border border-gray-300 rounded-lg px-3 py-3 pr-8 text-base font-medium text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                  className="w-full appearance-none bg-white border border-gray-300 rounded-lg px-3 py-2 pr-8 text-base text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                 >
                   <option value="all">전체</option>
                   {Object.entries(MOOD_CONFIG).map(([value, config]) => (
@@ -126,7 +121,6 @@ export const MoodHistory = () => {
                     </option>
                   ))}
                 </select>
-                <ChevronDown className="absolute right-2 top-1/2 transform -translate-y-1/2 w-6 h-6 text-gray-600 pointer-events-none" />
               </div>
 
               {/* 정렬 드롭다운 */}
@@ -134,7 +128,7 @@ export const MoodHistory = () => {
                 <select
                   value={sortOption}
                   onChange={(e) => setSortOption(e.target.value as SortOption)}
-                  className="w-full appearance-none bg-white border border-gray-300 rounded-lg px-3 py-3 pr-8 text-base font-medium text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                  className="w-full appearance-none bg-white border border-gray-300 rounded-lg px-3 py-2 pr-8 text-base text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                 >
                   {SORT_OPTIONS.map((option) => (
                     <option key={option.value} value={option.value}>
@@ -142,20 +136,19 @@ export const MoodHistory = () => {
                     </option>
                   ))}
                 </select>
-                <ChevronDown className="absolute right-2 top-1/2 transform -translate-y-1/2 w-6 h-6 text-gray-600 pointer-events-none" />
               </div>
 
               {/* 검색 입력 */}
               <div className="relative flex-1 max-w-[360px]">
-                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                  <Search className="h-6 w-6 text-gray-400" />
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <Search className="h-5 w-5 text-gray-400" />
                 </div>
                 <input
                   type="text"
                   placeholder="감정이나 내용을 검색해보세요"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="block w-full pl-12 pr-4 py-3 border border-gray-300 rounded-full text-base placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                  className="block w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg text-base placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                 />
               </div>
             </div>
@@ -199,7 +192,7 @@ export const MoodHistory = () => {
 
           {/* 페이지네이션 */}
           {currentItems.length > 0 && (
-            <div className="mt-12">
+            <div className="mt-6">
               <Pagination
                 currentPage={currentPage}
                 totalPages={Math.max(1, totalPages)}
@@ -209,19 +202,38 @@ export const MoodHistory = () => {
           )}
         </>
       ) : (
-        // 사진 보관함 탭 (추후 구현)
-        <div className="flex flex-col items-center justify-center py-16 text-gray-500">
-          <p className="text-lg font-medium">준비 중입니다</p>
-          <p className="text-sm text-gray-400 mt-2">
-            곧 새로운 기능이 추가될 예정입니다
-          </p>
-        </div>
+        <>
+          {/* 사진보관함 필터 영역 */}
+          <div className="flex justify-between items-center">
+            <div className="relative min-w-[120px]">
+              <select
+                className="w-full appearance-none bg-white border border-gray-300 rounded-lg px-3 py-2 pr-8 text-base"
+                defaultValue="latest"
+              >
+                <option value="latest">최신순</option>
+                <option value="oldest">오래된순</option>
+              </select>
+            </div>
+            <button
+              className="flex items-center gap-1 px-4 py-2 bg-black text-white rounded-lg font-semibold text-lg hover:bg-gray-800 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gray-300"
+              onClick={() => setIsUploadModalOpen(true)}
+            >
+              <Plus className="w-6 h-6" />
+              사진 추가
+            </button>
+          </div>
+          <PhotoGallery />
+        </>
       )}
 
-      {/* 일기 작성 모달 */}
+      {/* 모달 */}
       <WriteMoodModal
         isOpen={isWriteModalOpen}
         onClose={() => setIsWriteModalOpen(false)}
+      />
+      <UploadPhotoModal
+        isOpen={isUploadModalOpen}
+        onClose={() => setIsUploadModalOpen(false)}
       />
     </div>
   );
