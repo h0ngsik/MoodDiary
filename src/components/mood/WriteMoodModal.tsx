@@ -69,11 +69,14 @@ export const WriteMoodModal = ({ isOpen, onClose }: WriteMoodModalProps) => {
       return;
     }
 
+    const now = new Date().toISOString();
     addMoodEntry({
       moodType: selectedMood,
       intensity: 3, // 기본값
       note: title,
       tags: [],
+      createdAt: now,
+      updatedAt: now,
     });
 
     // 성공 모달 표시

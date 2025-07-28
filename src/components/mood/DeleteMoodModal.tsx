@@ -14,7 +14,7 @@ export const DeleteMoodModal = ({
   onConfirm,
 }: DeleteMoodModalProps) => {
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size="small">
+    <Modal isOpen={isOpen} onClose={onClose}>
       <div className="flex flex-col items-center p-6 gap-10">
         {/* 텍스트 영역 */}
         <div className="flex flex-col items-start gap-4 w-[432px]">

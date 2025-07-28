@@ -9,8 +9,8 @@ interface SuccessModalProps {
 
 export const SuccessModal = ({ isOpen, onClose }: SuccessModalProps) => {
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size="small">
-      <div className="flex flex-col items-center p-6 gap-10 w-[480px] h-[200px]">
+    <Modal isOpen={isOpen} onClose={onClose}>
+      <div className="flex flex-col items-center p-6 gap-10">
         {/* 텍스트 영역 */}
         <div className="flex flex-col items-start w-[432px] gap-4">
           <h2 className="w-full text-2xl font-bold text-center leading-6 tracking-[-0.01em] text-black">
