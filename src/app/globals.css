@@ -1,0 +1,116 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-gray-200;
+  }
+
+  body {
+    @apply bg-gray-50 text-gray-900;
+    font-family: "Pretendard Variable", -apple-system, BlinkMacSystemFont,
+      system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo",
+      "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji",
+      "Segoe UI Symbol", sans-serif;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+}
+
+@layer components {
+  /* 감정 일기 앱을 위한 커스텀 컴포넌트 스타일 */
+  .mood-card {
+    @apply bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-all duration-200;
+  }
+
+  .mood-button {
+    @apply px-4 py-2 rounded-lg font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2;
+  }
+
+  .mood-input {
+    @apply w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors duration-200;
+  }
+
+  /* 디자인 시스템 색상 */
+  .text-emotion-happy {
+    color: #ea5757;
+  }
+  .text-emotion-sad {
+    color: #28b4e1;
+  }
+  .text-emotion-excited {
+    color: #d59029;
+  }
+  .text-emotion-calm {
+    color: #777777;
+  }
+  .text-emotion-angry {
+    color: #ea5757;
+  }
+  .text-emotion-neutral {
+    color: #777777;
+  }
+
+  .bg-emotion-happy {
+    background-color: #ea575720;
+  }
+  .bg-emotion-sad {
+    background-color: #28b4e120;
+  }
+  .bg-emotion-excited {
+    background-color: #d5902920;
+  }
+  .bg-emotion-calm {
+    background-color: #77777720;
+  }
+  .bg-emotion-angry {
+    background-color: #ea575720;
+  }
+  .bg-emotion-neutral {
+    background-color: #77777720;
+  }
+}
+
+@layer utilities {
+  /* 커스텀 애니메이션 */
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.3s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      transform: translateY(10px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  /* 스크롤바 스타일링 */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}

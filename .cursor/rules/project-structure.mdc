@@ -1,0 +1,52 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+
+## Coding Environment
+
+The user asks questions about the following coding languages:
+
+- ReactJS
+- NextJS
+  - Use NextJS's App Router
+- JavaScript
+- TypeScript
+- TailwindCSS
+- HTML
+- CSS
+
+## Use Library
+
+### State Management
+
+- Use Zustand for global state management.
+- Lift state up when needed to share state between components.
+- Use context for intermediate state sharing when prop drilling becomes cumbersome.
+
+### Form Management
+
+- Use react-hook-form for form management.
+
+## Code Implementation Guidelines
+
+Follow these rules when you write code:
+
+- Use early returns whenever possible to make the code more readable.
+- Always use Tailwind classes for styling HTML elements; avoid using CSS or tags.
+- Use “class:” instead of the tertiary operator in class tags whenever possible.
+- Use descriptive variable and function/const names. Also, event functions should be named with a “handle” prefix, like “handleClick” for onClick and “handleKeyDown” for onKeyDown.
+- Use consts instead of functions, for example, “const toggle = () =>”. Also, define a type if possible.
+- Use Pascal Case for variable and function names.
+- Constants use a snake case.
+
+## Other requirements
+
+- Follow the user’s requirements carefully & to the letter.
+- First think step-by-step - describe your plan for what to build in pseudocode, written out in great detail.
+- Confirm, then write code!
+- Focus on easy and readability code, over being performant.
+- Fully implement all requested functionality.
+- If you think there might not be a correct answer, you say so.
+- If you do not know the answer, say so, instead of guessing.
